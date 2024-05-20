@@ -8,24 +8,27 @@ terraform {
   }
 }
 
-variable "application_credential_id" { }
-variable "application_credential_secret" { }
 variable "auth_url" { }
+variable "user_name" { }
+variable "tenant_name" { }
+variable "password" { }
 
 provider "openstack" {
-  auth_url = var.auth_url
-  application_credential_id = var.application_credential_id
-  application_credential_secret = var.application_credential_secret
+  auth_url    = var.auth_url
+  user_name   = var.user_name
+  tenant_name = var.tenant_name
+  password    = var.password
+  region      = "RegionOne"
   max_retries = 200
 }
 
-resource "openstack_compute_instance_v2" "flux-instance" {
-  name            = "test-machine"
-  image_name      = "rhcos-4.14"
-  flavor_name       = "m1.small"
+resource "openstack_compute_instance_v2" "flux-terraform-test" {
+  name            = "flux-terraform-test"
+  image_name      = "fedora-39"
+  flavor_id       = "d09592d3-0d3f-4a98-be10-9e2460fbb67a"
   security_groups = ["default"]
 
   network {
-    name = "provider_net_cci_13"
+    name = "ext_net"
   }
 }

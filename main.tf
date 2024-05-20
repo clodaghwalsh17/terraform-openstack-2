@@ -8,10 +8,10 @@ terraform {
   }
 }
 
-variable "instance_name" { }
 variable "application_credential_id" { }
 variable "application_credential_secret" { }
 variable "auth_url" { }
+
 provider "openstack" {
   auth_url = var.auth_url
   application_credential_id = var.application_credential_id
@@ -19,7 +19,7 @@ provider "openstack" {
 }
 
 resource "openstack_compute_instance_v2" "flux-instance" {
-  name            = var.instance_name
+  name            = "test-machine"
   image_name      = "rhcos-4.14"
   flavor_name       = "m1.small"
   security_groups = ["default"]

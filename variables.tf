@@ -12,3 +12,8 @@ variable "application_credential_secret" {
   type = string
   description = "Openstack application credential secret"
 }
+
+variable "auth_url" {
+  type = string
+  description = "Openstack auth url"
+}

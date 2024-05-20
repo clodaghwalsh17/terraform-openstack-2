@@ -8,6 +8,10 @@ terraform {
   }
 }
 
+variable "instance_name" { }
+variable "application_credential_id" { }
+variable "application_credential_secret" { }
+variable "auth_url" { }
 provider "openstack" {
   auth_url = var.auth_url
   application_credential_id = var.application_credential_id
